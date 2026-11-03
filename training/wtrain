@@ -1,0 +1,6 @@
+#!/bin/sh
+# Pause/resume training wrapper; see `training/wtrain --help`.
+here="$(cd "$(dirname "$0")" && pwd)"
+py="$here/../.venv-training/bin/python"
+[ -x "$py" ] || py=python3
+exec "$py" "$here/runner.py" "$@"

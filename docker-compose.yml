@@ -1,0 +1,13 @@
+services:
+  wriggle:
+    build: .
+    container_name: wriggle
+    restart: unless-stopped
+    ports:
+      - "23234:23234"
+    volumes:
+      - wriggle-ssh:/app/.ssh
+    command: ["-port", "23234", "-bot-policy", "models/wriggle-v4-personalities.best.json"]
+
+volumes:
+  wriggle-ssh:

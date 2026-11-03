@@ -1,0 +1,12 @@
+# Install PyTorch for your GPU platform first:
+#
+# NVIDIA CUDA (example for CUDA 12.4):
+#   pip install torch --index-url https://download.pytorch.org/whl/cu124
+#
+# AMD ROCm (example for ROCm 7.2):
+#   pip install torch --index-url https://download.pytorch.org/whl/rocm7.2
+#
+# Both CUDA and ROCm PyTorch wheels bundle the corresponding Triton compiler
+# used by training/gpu_kernels.py.
+numpy>=1.26.0
+torch>=2.4.0

@@ -1,0 +1,33 @@
+# SSH host keys & secrets
+.ssh/
+
+# Compiled binaries & test artifacts
+wriggle
+trainenv
+*.test
+*.out
+coverage.txt
+
+# Local training scratch & virtual environments
+.venv-training/
+.venv/
+venv/
+.training/
+__pycache__/
+*.py[cod]
+
+# Large or ephemeral training checkpoints/logs (keep portable *.best.json models tracked)
+models/*.pt
+models/*.tmp
+models/*.lock
+models/*.log
+models/*.status.json
+models/*.exit.json
+models/*.report.json
+models/*.html
+
+# Local agent / session files
+.agents/
+.gemini/
+HANDOFF.md
+lastupdate
