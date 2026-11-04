@@ -1,0 +1,101 @@
+{
+  "construction": "One direct construction from zero tensors, no optimization or fitting.",
+  "initial_saved_before_behavioral_evaluation": true,
+  "initial_sha256": "d2409101346528deb8b458d6dbf47d8fc90c938cd1daf6eb5ace294509f5df9a",
+  "final_sha256": "d2409101346528deb8b458d6dbf47d8fc90c938cd1daf6eb5ace294509f5df9a",
+  "revision_rounds": 0,
+  "sequence": [
+    {
+      "phase": "development",
+      "policies": [
+        "models/authored-initial.json"
+      ],
+      "seed_first": 310000,
+      "seed_last": 310013,
+      "episodes_per_policy": 14,
+      "horizon": 600,
+      "output": "initial-development.json"
+    },
+    {
+      "phase": "initial diagnostics",
+      "command": "AUTHORED_POLICY=../models/authored-initial.json go test ./game -run TestAuthored -count=1 -v",
+      "output": "initial-diagnostics.txt",
+      "result": "pass; ten action fixtures (one expected unavoidable death), twelve rotations, two tail-growth variants, live dispatch and serialization"
+    },
+    {
+      "phase": "freeze",
+      "decision": "No revision: preserve initial candidate as final before holdout."
+    },
+    {
+      "phase": "holdout",
+      "policies": [
+        "models/authored.json",
+        "heuristic",
+        "models/wriggle-v6.json"
+      ],
+      "seed_first": 730000,
+      "seed_last": 730055,
+      "episodes_per_policy": 56,
+      "horizon": 1200,
+      "output": "holdout.json",
+      "used_for_revisions": false
+    },
+    {
+      "phase": "verification",
+      "commands": [
+        "python3 -m unittest discover -s authored -p 'test_*.py' -v",
+        "python3 authored/generate.py --check",
+        "go test ./...",
+        "go vet ./...",
+        "git diff --check"
+      ],
+      "result": "pass; full Go suite repeats authored diagnostics"
+    },
+    {
+      "phase": "repeatability",
+      "policies": [
+        "models/authored.json",
+        "heuristic",
+        "models/wriggle-v6.json"
+      ],
+      "seed_first": 730000,
+      "seed_last": 730000,
+      "episodes_per_policy": 1,
+      "horizon": 1200,
+      "output": "repeatability.json",
+      "result": "all three per-episode records exactly match first holdout episode"
+    },
+    {
+      "phase": "additional frozen v4 comparison requested by user",
+      "policies": [
+        "models/wriggle-v4.json",
+        "models/wriggle-v4-personalities.best.json"
+      ],
+      "seed_first": 730000,
+      "seed_last": 730055,
+      "episodes_per_policy": 56,
+      "horizon": 1200,
+      "output": "v4-holdout.json",
+      "used_for_revisions": false,
+      "authored_results": "Reused original frozen holdout; no rerun."
+    },
+    {
+      "phase": "subsequent two-hidden-layer experiment",
+      "details": "deep-evaluation-log.json",
+      "additional_episodes": 196,
+      "original_weights_changed": false
+    }
+  ],
+  "episode_totals": {
+    "development": 14,
+    "holdout": 168,
+    "repeatability": 3,
+    "total": 493,
+    "additional_v4_comparison": 112,
+    "two_hidden_layer_experiment": 196
+  },
+  "diagnostics": "Two invocations of authored test suite (initial dedicated run and full Go suite). Local fixtures are separate from episode totals.",
+  "evaluation_opponents": "Existing Go heuristic; teacher observation side effects disabled for all competitors.",
+  "hardware_scope": "Authoritative Go CPU engine; no GPU simulation or training.",
+  "runtime_modifications": "None: only new generator, portable weight artifacts, tests, evaluation command, and documentation."
+}

@@ -1,0 +1,33 @@
+=== RUN   TestAuthoredDeepArtifact
+--- PASS: TestAuthoredDeepArtifact (0.01s)
+=== RUN   TestAuthoredDeepBoostConditions
+=== RUN   TestAuthoredDeepBoostConditions/rich_aligned_clear
+    authored_deep_test.go:114: action=10 alive=true boost_spent=0.80
+=== RUN   TestAuthoredDeepBoostConditions/insufficient_score
+    authored_deep_test.go:114: action=3 alive=true boost_spent=0.00
+=== RUN   TestAuthoredDeepBoostConditions/food_too_far
+    authored_deep_test.go:114: action=3 alive=true boost_spent=0.00
+=== RUN   TestAuthoredDeepBoostConditions/food_behind
+    authored_deep_test.go:114: action=0 alive=true boost_spent=0.00
+=== RUN   TestAuthoredDeepBoostConditions/food_left
+    authored_deep_test.go:114: action=1 alive=true boost_spent=0.00
+=== RUN   TestAuthoredDeepBoostConditions/food_right
+    authored_deep_test.go:114: action=5 alive=true boost_spent=0.00
+=== RUN   TestAuthoredDeepBoostConditions/poor_food
+    authored_deep_test.go:114: action=3 alive=true boost_spent=0.00
+=== RUN   TestAuthoredDeepBoostConditions/rival_ahead
+    authored_deep_test.go:114: action=0 alive=true boost_spent=0.00
+--- PASS: TestAuthoredDeepBoostConditions (0.01s)
+    --- PASS: TestAuthoredDeepBoostConditions/rich_aligned_clear (0.00s)
+    --- PASS: TestAuthoredDeepBoostConditions/insufficient_score (0.00s)
+    --- PASS: TestAuthoredDeepBoostConditions/food_too_far (0.00s)
+    --- PASS: TestAuthoredDeepBoostConditions/food_behind (0.00s)
+    --- PASS: TestAuthoredDeepBoostConditions/food_left (0.00s)
+    --- PASS: TestAuthoredDeepBoostConditions/food_right (0.00s)
+    --- PASS: TestAuthoredDeepBoostConditions/poor_food (0.00s)
+    --- PASS: TestAuthoredDeepBoostConditions/rival_ahead (0.00s)
+=== RUN   TestAuthoredDeepFoodSuppression
+    authored_deep_test.go:138: food contribution clear=1.190531 blocked=0.000000
+--- PASS: TestAuthoredDeepFoodSuppression (0.00s)
+PASS
+ok  	wriggle/game	0.030s
