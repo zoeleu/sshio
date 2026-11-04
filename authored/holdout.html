@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{font:14px var(--font-sans,system-ui);color:var(--foreground);margin:0}
+p{line-height:1.5}.plot{height:180px;display:flex;flex-direction:column;justify-content:space-around}
+.row{display:grid;grid-template-columns:minmax(100px,1.4fr) 2fr 44px;gap:12px;align-items:center}
+.track{height:20px;background:var(--secondary,#ddd);border-radius:3px}.bar{height:20px;background:var(--chart-1,#3985ba);border-radius:3px}
+.row:nth-child(2) .bar{background:var(--chart-2,#b18b2e)}.row:nth-child(3) .bar{background:var(--chart-3,#9e63b5)}
+small{color:var(--muted-foreground);line-height:1.5}</style></head><body>
+<p>Survival to 1,200 ticks · 56 held-out episodes per policy</p><div class="plot" role="img" aria-label="Survivors: authored 46 of 56, heuristic 40 of 56, shipped v6 20 of 56"><div class="row"><span>Authored (initial = final)</span><div class="track"><div class="bar" style="width:82.1429%"></div></div><b>46/56</b></div><div class="row"><span>Existing heuristic</span><div class="track"><div class="bar" style="width:71.4286%"></div></div><b>40/56</b></div><div class="row"><span>Shipped wriggle-v6</span><div class="track"><div class="bar" style="width:35.7143%"></div></div><b>20/56</b></div></div>
+<small>Seeds 730000–730055; seven scenarios; heuristic opponents. Initial and final authored weights are identical. This finite suite does not establish general superiority.</small></body></html>

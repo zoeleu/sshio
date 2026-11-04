@@ -237,3 +237,9 @@ Run the Python / GPU simulator parity and trainer unit tests (automatically runs
 ## License
 
 Released under the [MIT License](LICENSE).
+
+## Directly authored neural bot
+
+A deterministic, untrained 692 → 64 → 14 policy is available in `models/authored.json`. Run `go run . -bot-policy models/authored.json`. See [the circuit, exact interface, regeneration and evaluation commands](authored/README.md) and [measured results](authored/RESULTS.md). The original pre-evaluation candidate is preserved as `models/authored-initial.json`.
+
+A second directly authored candidate uses two hidden layers: `go run . -bot-policy models/authored-deep.json`. See [its circuit and reproduction commands](authored/DEEP.md) and [the new held-out comparison](authored/DEEP-RESULTS.md).

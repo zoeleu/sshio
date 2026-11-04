@@ -1,0 +1,40 @@
+=== RUN   TestAuthoredDiagnostics
+=== RUN   TestAuthoredDiagnostics/food_left
+    authored_policy_test.go:146: first action=1 alive after 4 ticks=true score=12.00
+=== RUN   TestAuthoredDiagnostics/food_right
+    authored_policy_test.go:146: first action=5 alive after 4 ticks=true score=12.00
+=== RUN   TestAuthoredDiagnostics/food_straight
+    authored_policy_test.go:146: first action=3 alive after 4 ticks=true score=12.00
+=== RUN   TestAuthoredDiagnostics/hazard_food
+    authored_policy_test.go:146: first action=6 alive after 4 ticks=true score=12.00
+=== RUN   TestAuthoredDiagnostics/head_on
+    authored_policy_test.go:146: first action=0 alive after 4 ticks=true score=12.00
+=== RUN   TestAuthoredDiagnostics/corner
+    authored_policy_test.go:146: first action=6 alive after 4 ticks=true score=12.00
+=== RUN   TestAuthoredDiagnostics/corridor
+    authored_policy_test.go:146: first action=3 alive after 4 ticks=true score=12.00
+=== RUN   TestAuthoredDiagnostics/border
+    authored_policy_test.go:146: first action=0 alive after 4 ticks=true score=12.00
+=== RUN   TestAuthoredDiagnostics/unavoidable_border
+    authored_policy_test.go:146: first action=0 alive after 4 ticks=false score=12.00
+=== RUN   TestAuthoredDiagnostics/own_tail
+    authored_policy_test.go:146: first action=3 alive after 4 ticks=true score=12.00
+--- PASS: TestAuthoredDiagnostics (0.01s)
+    --- PASS: TestAuthoredDiagnostics/food_left (0.00s)
+    --- PASS: TestAuthoredDiagnostics/food_right (0.00s)
+    --- PASS: TestAuthoredDiagnostics/food_straight (0.00s)
+    --- PASS: TestAuthoredDiagnostics/hazard_food (0.00s)
+    --- PASS: TestAuthoredDiagnostics/head_on (0.00s)
+    --- PASS: TestAuthoredDiagnostics/corner (0.00s)
+    --- PASS: TestAuthoredDiagnostics/corridor (0.00s)
+    --- PASS: TestAuthoredDiagnostics/border (0.00s)
+    --- PASS: TestAuthoredDiagnostics/unavoidable_border (0.00s)
+    --- PASS: TestAuthoredDiagnostics/own_tail (0.00s)
+=== RUN   TestAuthoredRotation
+--- PASS: TestAuthoredRotation (0.01s)
+=== RUN   TestAuthoredTailMovementAndGrowth
+    authored_policy_test.go:216: growth=false action=0 tailY=0.1000->0.9000 alive=true
+    authored_policy_test.go:216: growth=true action=0 tailY=0.1000->0.9000 alive=true
+--- PASS: TestAuthoredTailMovementAndGrowth (0.01s)
+PASS
+ok  	wriggle/game	0.025s

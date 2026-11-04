@@ -1,0 +1,83 @@
+{
+  "suite": "Go TrainingEnv, seven scenarios, heuristic opponents, teacher disabled",
+  "horizon": 1200,
+  "results": [
+    {
+      "policy": "models/authored.json",
+      "sha256": "d2409101346528deb8b458d6dbf47d8fc90c938cd1daf6eb5ace294509f5df9a",
+      "mean_return": 10.680000000000032,
+      "mean_food": 45.599999999999994,
+      "mean_score": 57.59999999999999,
+      "mean_survival_ticks": 1200,
+      "survival_fraction": 1,
+      "kills": 0,
+      "circles": 0,
+      "runs": [
+        {
+          "seed": 730000,
+          "scenario": "arena",
+          "return": 10.680000000000032,
+          "food": 45.599999999999994,
+          "score": 57.59999999999999,
+          "ticks": 1200,
+          "alive": true,
+          "kills": 0,
+          "mutual_kills": 0,
+          "circles": 0,
+          "boost_spent": 0
+        }
+      ]
+    },
+    {
+      "policy": "heuristic",
+      "mean_return": 14.205278780912375,
+      "mean_food": 66.2,
+      "mean_score": 69.35092926970782,
+      "mean_survival_ticks": 1200,
+      "survival_fraction": 1,
+      "kills": 0,
+      "circles": 3,
+      "runs": [
+        {
+          "seed": 730000,
+          "scenario": "arena",
+          "return": 14.205278780912375,
+          "food": 66.2,
+          "score": 69.35092926970782,
+          "ticks": 1200,
+          "alive": true,
+          "kills": 0,
+          "mutual_kills": 0,
+          "circles": 3,
+          "boost_spent": 8.400000000000002
+        }
+      ]
+    },
+    {
+      "policy": "models/wriggle-v6.json",
+      "sha256": "ac443b85c2fcc47669406b2e30b3e67d964ccf3a899815ac72548edd7b88c250",
+      "mean_return": -9.49,
+      "mean_food": 4,
+      "mean_score": 16,
+      "mean_survival_ticks": 276,
+      "survival_fraction": 0,
+      "kills": 0,
+      "circles": 1,
+      "runs": [
+        {
+          "seed": 730000,
+          "scenario": "arena",
+          "return": -9.49,
+          "food": 4,
+          "score": 16,
+          "ticks": 276,
+          "alive": false,
+          "kills": 0,
+          "mutual_kills": 0,
+          "circles": 1,
+          "boost_spent": 0
+        }
+      ]
+    }
+  ]
+}

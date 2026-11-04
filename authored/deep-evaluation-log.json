@@ -1,0 +1,83 @@
+{
+  "initial_saved_before_behavioral_evaluation": true,
+  "initial_sha256": "37942aede8996a543e65653335f9c197a56325da1927b08ee1ce3c14eeaf4f74",
+  "final_sha256": "37942aede8996a543e65653335f9c197a56325da1927b08ee1ce3c14eeaf4f74",
+  "revision_rounds": 0,
+  "construction": "Zero tensors and explicit analytic assignments; no training, fitting, pretrained weights, or automated parameter search.",
+  "sequence": [
+    {
+      "phase": "initial freeze",
+      "artifacts": [
+        "models/authored-deep-initial.json",
+        "models/authored-deep.json"
+      ],
+      "architecture": [
+        692,
+        64,
+        64,
+        14
+      ]
+    },
+    {
+      "phase": "development",
+      "policies": [
+        "models/authored-deep-initial.json",
+        "models/authored.json"
+      ],
+      "seed_first": 410000,
+      "seed_last": 410013,
+      "episodes_per_policy": 14,
+      "horizon": 1200,
+      "output": "deep-development.json"
+    },
+    {
+      "phase": "initial diagnostics",
+      "command": "AUTHORED_POLICY=../models/authored-deep-initial.json go test ./game -run '^TestAuthored(Diagnostics|Rotation|TailMovementAndGrowth)$' -count=1 -v",
+      "output": "deep-initial-diagnostics.txt",
+      "result": "passed; includes expected unavoidable border death"
+    },
+    {
+      "phase": "deep circuit diagnostics",
+      "command": "go test ./game -run '^TestAuthoredDeep' -count=1 -v",
+      "output": "deep-circuit-diagnostics.txt",
+      "result": "passed artifact/live dispatch, eight boost cases and food suppression"
+    },
+    {
+      "phase": "final freeze",
+      "decision": "Keep the initial candidate without revisions. Development reward essentially tied with single layer."
+    },
+    {
+      "phase": "holdout",
+      "policies": [
+        "models/authored-deep.json",
+        "models/authored.json",
+        "models/wriggle-v4.json"
+      ],
+      "seed_first": 830000,
+      "seed_last": 830055,
+      "episodes_per_policy": 56,
+      "horizon": 1200,
+      "output": "deep-holdout.json",
+      "used_for_revisions": false
+    },
+    {
+      "phase": "verification",
+      "commands": [
+        "python3 -m unittest discover -s authored -p 'test_*.py' -v",
+        "python3 authored/generate_deep.py --check",
+        "go test ./...",
+        "go vet ./...",
+        "git diff --check"
+      ],
+      "result": "passed; full Go suite repeats dedicated deep circuit tests and original shallow diagnostics"
+    }
+  ],
+  "episode_totals": {
+    "development": 28,
+    "holdout": 168,
+    "total": 196
+  },
+  "runtime_changes": "None; the requested second hidden layer uses the existing optional WH/BH loader and inference path.",
+  "baselines": "Original authored single-layer policy and shipped plain v4 remain unchanged.",
+  "diagnostics": "Local diagnostic invocations are recorded separately from episode counts."
+}
