@@ -1,0 +1,16 @@
+[workspace]
+members = ["crates/sshio-core", "crates/sshio-server", "crates/sshio-python"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+
+[profile.dev]
+debug = 0
+incremental = false
+
+[profile.release]
+codegen-units = 1
+lto = false

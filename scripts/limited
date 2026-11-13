@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Session-local limits: one logical CPU, <= 2 library workers, 2 GiB address space.
+set -euo pipefail
+cpu=$(python3 -c 'import os; print(min(os.sched_getaffinity(0)))')
+export CARGO_BUILD_JOBS=1 RAYON_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2
+ulimit -v "${SSHIO_MEMORY_KIB:-2097152}"
+exec taskset -c "$cpu" "$@"
