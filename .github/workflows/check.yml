@@ -1,0 +1,23 @@
+name: check
+on: [pull_request, workflow_dispatch]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: scripts/limited cargo fmt --all -- --check
+      - run: scripts/limited cargo clippy --locked --workspace --all-targets -- -D warnings
+      - run: scripts/limited cargo test --locked --workspace -- --test-threads=1
+      - run: scripts/limited cargo build --locked -p sshio-server
+      - run: scripts/limited python3 scripts/check_ssh.py
+      - run: scripts/limited python -m pip install 'maturin>=1.9,<2'
+      - run: scripts/limited maturin build --locked --out target/wheels
+      - run: scripts/limited python -m pip install --no-deps target/wheels/*.whl
+      - run: scripts/limited sh -c 'python tests/native_smoke.py "$(cargo run -q -p sshio-core --example fingerprint)"'

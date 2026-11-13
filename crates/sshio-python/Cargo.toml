@@ -1,0 +1,13 @@
+[package]
+name = "sshio-python"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "_native"
+crate-type = ["cdylib"]
+
+[dependencies]
+sshio-core = { path = "../sshio-core" }
+pyo3 = { version = "0.28", features = ["extension-module", "abi3-py310"] }

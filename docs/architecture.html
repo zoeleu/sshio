@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{color-scheme:dark;--foreground:#e5e7eb;--muted-foreground:#a1a1aa;--card:#151820;--border:#343744;--primary:#67e8f9;--primary-foreground:#071019;--chart-1:#67e8f9;--chart-2:#c4b5fd;--chart-3:#fcd34d;--radius:12px;--font-sans:system-ui,sans-serif;--font-mono:ui-monospace,monospace}
+*{box-sizing:border-box}body{margin:0;color:var(--foreground);font:14px/1.5 var(--font-sans)}button{font:inherit;cursor:pointer;border:1px solid var(--border);border-radius:999px;padding:7px 15px;color:var(--foreground);background:transparent}button[aria-selected=true]{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)}button:focus-visible{outline:2px solid var(--primary);outline-offset:3px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.panel[hidden]{display:none}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px}.box strong{display:block;font-size:15px;margin-bottom:4px}.box p{margin:0;color:var(--muted-foreground)}.core{border-color:var(--primary)}.arrow{text-align:center;color:var(--muted-foreground);padding:7px 0;font-size:13px}.small{font-size:12px;color:var(--muted-foreground);margin:12px 0 0}.label{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted-foreground);margin:0 0 8px}.bar{display:flex;height:38px;border-radius:8px;overflow:hidden;margin:12px 0}.bar span{display:flex;align-items:center;justify-content:center;color:#0b1020;font-weight:700;font-size:12px}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px}.swatch{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px}.ledger{font:13px var(--font-mono);padding:12px 0;color:var(--primary)}.stack{display:grid;gap:12px}.list{margin:8px 0 0;padding-left:18px;color:var(--muted-foreground)}@media(max-width:460px){.row{grid-template-columns:1fr}.box{padding:13px}}
+</style></head><body>
+<div class="tabs" role="tablist" aria-label="Explore the proposed sshio design">
+<button id="tab-play" role="tab" aria-selected="true" aria-controls="play">Play</button>
+<button id="tab-train" role="tab" aria-selected="false" aria-controls="train">Train</button>
+<button id="tab-fair" role="tab" aria-selected="false" aria-controls="fair">Fairness</button>
+</div>
+<section id="play" class="panel" role="tabpanel" aria-labelledby="tab-play">
+<div class="row"><div class="box"><strong>SSH terminal</strong><p>Russh · Ratatui<br>Striped half-block graphics<br>Direction keys + boost toggle</p></div><div class="box"><strong>Browser · later</strong><p>TypeScript · PixiJS<br>WebSocket snapshots<br>Same visibility and actions</p></div></div>
+<div class="arrow">↓ bounded actions &nbsp; ↑ visible snapshots</div>
+<div class="box core"><strong>One authoritative Rust simulation</strong><p>30 Hz physics · 10 Hz control · circular arena<br>Collision, mass ledger, spawning, crown lifecycle</p></div>
+<div class="arrow">↑ the same policy contract</div>
+<div class="row"><div class="box"><strong>Heuristic bots · first</strong><p>Local observations, diverse play styles, bounded reaction rate.</p></div><div class="box"><strong>Learned bots · next</strong><p>Frozen ONNX actors, batched inference, heuristic fallback.</p></div></div>
+<p class="small">All rates are proposed starting settings, to be tested over real SSH connections.</p>
+</section>
+<section id="train" class="panel" role="tabpanel" aria-labelledby="tab-train" hidden>
+<div class="row"><div class="box"><strong>Consented player sessions</strong><p>All-participant capture eligibility, input timing, checkpoints, lineage.</p></div><div class="box"><strong>Native simulation batches</strong><p>The production Rust rules via PyO3, without network or rendering overhead.</p></div></div>
+<div class="arrow">↓ validated sequences and versioned observations</div>
+<div class="box core"><strong>Python + PyTorch</strong><p>Optional imitation → PPO → league self-play<br>PettingZoo interfaces · resumable checkpoints</p></div>
+<div class="arrow">↓ frozen evaluation → ONNX parity → staged deployment</div>
+<div class="row"><div class="box"><strong>Managed Colab</strong><p>Detect assigned hardware and adapt batch sizes. A specific GPU is not guaranteed.</p></div><div class="box"><strong>Controlled Blackwell runtime</strong><p>Connect Colab to your tested Jupyter machine with the RTX PRO 6000.</p></div></div>
+<p class="small">Human data is optional: train from scratch or synthetic demonstrations. The production game runs independently of Colab; optimize native batching before GPU physics.</p>
+</section>
+<section id="fair" class="panel" role="tabpanel" aria-labelledby="tab-fair" hidden>
+<div class="box"><strong>Illustrative initial mass allocation</strong><p>24 starting snakes · 20,000 total units · proposed configuration</p>
+<div class="bar" role="img" aria-label="Snakes: 2400 units, 12 percent. Food: 8000 units, 40 percent. Reserve: 9600 units, 48 percent."><span style="width:12%;background:var(--chart-1)">12%</span><span style="width:40%;background:var(--chart-2)">40%</span><span style="width:48%;background:var(--chart-3)">48%</span></div>
+<div class="legend"><span><i class="swatch" style="background:var(--chart-1)"></i>Snakes 2,400</span><span><i class="swatch" style="background:var(--chart-2)"></i>Food 8,000</span><span><i class="swatch" style="background:var(--chart-3)"></i>Reserve 9,600</span></div>
+<div class="ledger">snakes + food + reserve = constant</div>
+<p>Boost, upkeep, deaths, spawns, and redistribution transfer existing mass.</p></div>
+<div class="arrow">↓ one starting death-distribution experiment</div>
+<div class="box"><strong>Death returns opportunity to the arena</strong><div class="bar" role="img" aria-label="40 percent nearby corpse food, 60 percent reserve."><span style="width:40%;background:var(--chart-2)">40% nearby food</span><span style="width:60%;background:var(--chart-3)">60% reserve</span></div><p>Reserve supports staged global food blooms and future spawns.</p></div>
+<p class="small">Symmetric rules · safe spawning · size costs · hard mass cap · visible 90-second crown lifecycle. These allocations are design hypotheses, not playtest results.</p>
+</section>
+<script>
+const tabs=[...document.querySelectorAll('[role=tab]')];
+function activate(tab){for(const b of tabs){const on=b===tab;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;document.getElementById(b.getAttribute('aria-controls')).hidden=!on;}}
+for(const b of tabs){b.onclick=()=>activate(b);b.onkeydown=e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const n=(tabs.indexOf(b)+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;activate(tabs[n]);tabs[n].focus();}}}
+activate(tabs[0]);
+</script></body></html>
