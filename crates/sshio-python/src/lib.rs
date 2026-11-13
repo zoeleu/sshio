@@ -100,6 +100,17 @@ impl Batch {
         if actions.len() != self.worlds.len() * self.slots || actions.iter().any(|&a| a >= 10) {
             return Err(PyValueError::new_err("expected one action 0..9 per slot"));
         }
+        Ok(self.advance(&actions))
+    }
+    fn hashes(&self) -> Vec<u64> {
+        self.worlds.iter().map(World::state_hash).collect()
+    }
+    fn mass_totals(&self) -> Vec<u32> {
+        self.worlds.iter().map(World::total_mass).collect()
+    }
+}
+impl Batch {
+    fn advance(&mut self, actions: &[usize]) -> TransitionBatch {
         let mut obs = Vec::new();
         let mut rewards = Vec::new();
         let mut done = Vec::new();
@@ -133,22 +144,55 @@ impl Batch {
                 });
                 done.push(dead);
                 obs.push(observation(w, *id));
-                if dead && let Some(next) = w.spawn("synthetic", slot) {
+            }
+            // Capture every actor's transition from the same pre-reset world.
+            // Respawns are visible only through the next observations() call.
+            for (slot, id) in ids.iter_mut().enumerate() {
+                if !w.snakes.contains_key(id)
+                    && let Some(next) = w.spawn("synthetic", slot)
+                {
                     *id = next;
                 }
             }
         }
-        Ok((obs, rewards, done))
-    }
-    fn hashes(&self) -> Vec<u64> {
-        self.worlds.iter().map(World::state_hash).collect()
-    }
-    fn mass_totals(&self) -> Vec<u32> {
-        self.worlds.iter().map(World::total_mass).collect()
+        (obs, rewards, done)
     }
 }
 #[pymodule]
 fn _native(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Batch>()?;
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn transition_observations_precede_all_respawns() {
+        for seed in 1..=16 {
+            let mut world = World::new(seed);
+            let ids = (0..8)
+                .map(|i| world.spawn("synthetic", i).unwrap())
+                .collect();
+            let mut batch = Batch {
+                worlds: vec![world],
+                agents: vec![ids],
+                slots: 8,
+            };
+            batch.worlds[0].remove(batch.agents[0][0]);
+            let mut expected_world = batch.worlds[0].clone();
+            for _ in 0..3 {
+                expected_world.step();
+            }
+            let expected: Vec<_> = batch.agents[0]
+                .iter()
+                .map(|&id| observation(&expected_world, id))
+                .collect();
+            let (actual, _, done) = batch.advance(&[2; 8]);
+            assert!(done[0]);
+            assert_eq!(actual, expected);
+            assert!(batch.worlds[0].snakes.contains_key(&batch.agents[0][0]));
+        }
+    }
 }

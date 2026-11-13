@@ -33,7 +33,7 @@ The Rust unit checks and the initial native/Python parity and SSH smoke checks p
 
 ### Local evidence (2026-11-13)
 
-- Rust workspace: four core regression tests, including a 900-tick paired deterministic run; single test worker. Strict Clippy and formatting checks run on all targets.
+- Rust workspace: four core regression tests, including a 900-tick paired deterministic run; single test worker. A Python-adapter regression across 16 seeds verifies that all returned transitions precede every respawn. Strict Clippy and formatting checks run on all targets.
 - Native/Python parity: fingerprint `16002484208198803887` after the same seed, eight spawns, and three simulation ticks; another 100 paired decision steps check shapes, actions, conservation, and reproducibility.
 - Built an ABI3 Python ≥3.10 Linux x86-64 wheel and installed it with no dependency downloads into a clean virtual environment on this host. This is a host-local wheel, not a verified manylinux/Colab artifact; portable release wheels remain a gate.
 - Two real OpenSSH processes join and move; a split arrow sequence is accepted; a resize from 80×24 to 120×40 is checked by the resulting HUD row; one disconnect leaves the other active; remote exec fails promptly.
